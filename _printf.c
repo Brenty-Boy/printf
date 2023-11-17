@@ -1,78 +1,68 @@
 #include "main.h"
 
-void print_buffer(char buffer[], int *buff_ind);
-
-/**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
- */
 int _printf(const char *format, ...)
 {
-convert_match m[] = {
-		{"%s", printf_string}, {"%c", printf_char},
-		{"%%", printf_37},
-		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_srev},
-		{"%R", printf_rot13}, {"%b", printf_bin}, {"%u", printf_unsigned},
-		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
-		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
-	};
-
-	va_list args;
-	int i, printed = 0, printed_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
-
-	va_list list;
-	char buffer[BUFF_SIZE];
-
+	int chara_print = 0;
+	va_list list_of_args;
+	
 	if (format == NULL)
 		return (-1);
-
+	
 	va_start(list_of_args, format);
-
-	for (i = 0; format && format[i] != '\0'; i++)
+	
+	while (*format) // A loop that iterates through the characters of the format
 	{
-		if (format[i] != '%')
+		if (*format != '%') // If format is not the % sign
 		{
-			buffer[buff_ind++] = format[i];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			/* write(1, &format[i], 1);*/
-			printed_chars++;
+			write(1, format, 1); // Write the char to the standard output
+			chara_print++;
 		}
-		else
+		else // If format is the % sign
 		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, list);
-			precision = get_precision(format, &i, list);
-			size = get_size(format, &i);
-			++i;
-			printed = handle_print(format, &i, list, buffer,
-				flags, width, precision, size);
-			if (printed == -1)
-				return (-1);
-			printed_chars += printed;
+			format++; // Skip '%' - Check the next character
+			if (*format == '\0')
+				break;
+
+			if (*format == '%') // This solves %%
+			{
+				// Handle '%%' (double '%')
+				write(1, format, 1);
+				chara_print++;
+			}
+			else if (*format == 'c')
+			{
+				// Handle '%c' (character)
+				char c = va_arg(list_of_args, int); // Use va_arg(list, char) for char
+				write(1, &c, 1);
+				chara_print++;
+			}
+			else if (*format == 's')
+			{
+				char *str = va_arg(list_of_args, char*);
+				int str_len = 0;
+
+				// Calculate the length of the string
+				while (str[str_len] != '\0')
+					str_len++;
+
+				// Write the string to the standard output
+				write(1, str, str_len);
+				chara_print += str_len;
+			}
 		}
+		
+		format++;
 	}
+	
+	va_end(list_of_args);
 
-	print_buffer(buffer, &buff_ind);
-
-	va_end(list);
-
-	return (printed_chars);
+	return chara_print;
 }
 
-/**
- * print_buffer - Prints the contents of the buffer if it exist
- * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
- */
-void print_buffer(char buffer[], int *buff_ind)
-{
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
 
-	*buff_ind = 0;
+int main(){
+	_printf("%c\n", 'v');
+	_printf("%s\n", "String");
+	_printf("%%\n");
+	return 0;
 }
-
