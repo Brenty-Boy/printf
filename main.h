@@ -1,5 +1,5 @@
-#ifndef /* MAIN_H */
-#define /* MAIN_H */
+#ifndef MAIN_H
+#define MAIN_H
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -19,7 +19,7 @@
 #define S_SHORT 1
 
 /**
- * struct fmt - Struct op
+ * typedef struct fmt - Struct op
  *
  * @fmt: The format.
  * @fn: The function associated.
@@ -114,4 +114,4 @@ int is_digit(char);
 long int convert_size_number(long int num, int size);
 long int convert_size_unsgnd(unsigned long int num, int size);
 
-#endif /* MAIN_H */
+#endif MAIN_H
