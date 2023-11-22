@@ -4,12 +4,12 @@
 #include "main.h"
 
 /**
-* print_int - function that prints an integer
-* @i: integer to print
-* Descriptions: prints digit with _putchar
-* Return: size the output text
+* printf_int - Function that prints an integer.
+* @i: Integer to print.
+* Descriptions: Prints digit with _putchar.
+* Return: Size of the output text.
 */
-int print_int(va_list i)
+int printf_int(va_list i)
 {
 	int len, powten, j, digit, n, count = 0, num;
 

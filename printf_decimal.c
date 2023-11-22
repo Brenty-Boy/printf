@@ -1,15 +1,15 @@
-#include <stdio.h>
+#include <stdib.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include "main.h"
 
 /**
-* print_dec - function that prints an decimal
+* printf_decimal - function that prints a decimal
 * @d: integer to print
 * Descriptions: prints digit with _putchar
 * Return: size the output text
 */
-int print_dec(va_list d)
+int printf_decimal(va_list d)
 {
 	int len, powten, j, digit, n, count = 0, num;
 

@@ -1,8 +1,11 @@
 #ifndef MAIN_H
 #define MAIN_H
+
+#include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
 
 #define UNUSED(x) (void)(x)
 #define BUFF_SIZE 1024
@@ -19,29 +22,15 @@
 #define S_SHORT 1
 
 /**
- * typedef struct fmt - Struct op
- *
- * @fmt: The format.
- * @fn: The function associated.
+ * struct format - Struct op
+ * @fmt: The format for the specifier i.e (l, h) for (d, i, u, o, x, X)
+ * @fn: The function associated
  */
-struct fmt
+typedef struct format
 {
-	char fmt;
-	int (*fn)(va_list, char[], int, int, int, int);
-};
-
-
-/**
- * typedef struct fmt fmt_t - Struct op
- *
- * @fmt: The format.
- * @fm_t: The function associated.
- */
-typedef struct fmt fmt_t;
-
-int _printf(const char *format, ...);
-int handle_print(const char *fmt, int *i,
-va_list list, char buffer[], int flags, int width, int precision, int size);
+	char *fmt;
+	int (*fn)();
+} convert_match;
 
 /****************** FUNCTIONS ******************/
 
@@ -102,8 +91,7 @@ int write_num(int ind, char bff[], int flags, int width, int precision,
 int write_pointer(char buffer[], int ind, int length,
 	int width, int flags, char padd, char extra_c, int padd_start);
 
-int write_unsgnd(int is_negative, int ind,
-char buffer[],
+int write_unsgnd(int is_negative, int ind, char buffer[],
 	int flags, int width, int precision, int size);
 
 /****************** UTILS ******************/

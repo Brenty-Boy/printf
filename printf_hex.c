@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
-* print_hex - function that prints an unsigned int in hexadecimal
-* @n: unsigned to be printed
-* @c: case of printing (0 = lower, 1 = upper)
-* Descriptions: prints unsigned in hexadecimal with _putchar
-* Return: size the output
+* printf_hex - Function that prints an unsigned int in hexadecimal.
+* @n: Unsigned to be printed.
+* @c: Case of printing (0 = lower, 1 = upper).
+* Descriptions: Prints unsigned in hexadecimal with _putchar.
+* Return: Size of the output.
 */
-int print_hex(unsigned int n, unsigned int c)
+int printf_hex(unsigned int n, unsigned int c)
 {
 	unsigned int len, powten, j, digit, num;
 	int count = 0;
@@ -49,22 +49,22 @@ int print_hex(unsigned int n, unsigned int c)
 	return (count);
 }
 /**
-* print_x - takes an unsigned int an prints it in lowercase hex
-* @x: unsigned int to print
-* Descriptions: prints in lowercase hex with _putchar
-* Return: size of the output
+* printf_x - Takes an unsigned int and prints it in lowercase hex.
+* @x: Unsigned int to print.
+* Descriptions: Prints in lowercase hex with _putchar.
+* Return: Size of the output.
 */
-int print_x(va_list x)
+int printf_x(va_list x)
 {
 	return (print_hex(va_arg(x, unsigned int), 0));
 }
 /**
-* print_X - takes an unsigned int an prints it in uppercase hex
-* @X: unsigned int to print
-* Descriptions: prints in uppercase hex with _putchar
-* Return: size of the output
+* printf_X - Takes an unsigned int and prints it in uppercase hex.
+* @X: Unsigned int to print.
+* Descriptions: Prints in uppercase hex with _putchar.
+* Return: Size of the output.
 */
-int print_X(va_list X)
+int printf_X(va_list X)
 {
 	return (print_hex(va_arg(X, unsigned int), 1));
 }
