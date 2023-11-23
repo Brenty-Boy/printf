@@ -4,9 +4,9 @@
  * @format: Format.
  * Return: Printed chars.
  */
-int _printf(const char *format, ...)
+int _printf(const char * const format, ...)
 {
-convert_match m[] = {
+	convert_match m[] = {
 		{"%s", printf_string}, {"%c", printf_char},
 		{"%%", printf_37},
 		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_srev},
