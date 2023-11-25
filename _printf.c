@@ -7,15 +7,24 @@ void print_buffer(char buffer[], int *buff_ind);
  * @format: format.
  * Return: Printed chars.
  */
+
 int _printf(const char *format, ...)
 {
 convert_match m[] = {
-		{"%s", printf_string}, {"%c", printf_char},
+		{"%s", printf_string},
+		{"%c", printf_char},
 		{"%%", printf_37},
-		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_srev},
-		{"%R", printf_rot13}, {"%b", printf_bin}, {"%u", printf_unsigned},
-		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
-		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
+		{"%i", printf_int},
+		{"%d", printf_dec},
+		{"%r", printf_srev},
+		{"%R", printf_rot13},
+		{"%b", printf_bin},
+		{"%u", printf_unsigned},
+		{"%o", printf_oct},
+		{"%x", printf_hex},
+		{"%X", printf_HEX},
+		{"%S", printf_exclusive_string},
+		{"%p", printf_pointer}
 	};
 
 	va_list args;
@@ -49,17 +58,14 @@ convert_match m[] = {
 			size = get_size(format, &i);
 			++i;
 			printed = handle_print(format, &i, list, buffer,
-				flags, width, precision, size);
+					flags, width, precision, size);
 			if (printed == -1)
 				return (-1);
 			printed_chars += printed;
 		}
 	}
-
 	print_buffer(buffer, &buff_ind);
-
 	va_end(list);
-
 	return (printed_chars);
 }
 
