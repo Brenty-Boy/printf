@@ -1,18 +1,20 @@
 #ifndef PRINTF_HEADER
 #define PRINTF_HEADER
 
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 #include <stdarg.h>
 #include <stddef.h>
-#include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 int _putchar(char c);
 int _printf(const char *format, ...);
 int (*_printf_selector(char specifier))(va_list);
 
 /**
- * struct specifiers - Struct specifiers and
- * their functions
+ * struct specifiers - Struct specifiers and their functions
  * @specifier: The operator
  * @function: The function associated
  */
